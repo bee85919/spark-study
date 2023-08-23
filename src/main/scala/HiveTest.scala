@@ -1,9 +1,8 @@
 import org.apache.spark.sql.{SaveMode, SparkSession}
 
-object SparkHiveLocal extends App {
+object HiveTest extends App {
   val sparkHome = System.getenv("SPARK_HOME")
-//  val logDir =  s"file:/Users/b06/spark-3.4.1-bin-hadoop3/event"
-  val logDir =  s"file:${sparkHome}/event"
+  val logDir = s"file:${sparkHome}/event"
   val spark = SparkSession.builder()
     .master("local[*]")
     .appName("SparkCreateTableExample")
@@ -23,5 +22,4 @@ object SparkHiveLocal extends App {
   // Create Hive Internal table
   sampleDF.write.mode(SaveMode.Overwrite)
     .saveAsTable("employee")
-
 }
