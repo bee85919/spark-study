@@ -33,7 +33,7 @@ Name Description
 */
 
 
-mport org.apache.spark.mllib.linalg._
+import org.apache.spark.mllib.linalg._
 import org.apache.spark.mllib.stat.Statistics
 
 // 비행 운행 데이터 로딩
@@ -50,9 +50,10 @@ val planeData = planeRdd.map(_.split(",")).
   map(fields => (fields(0), fields(8)))
 
 // 비행기 노후화와 지연시간 결합
+val currentYear = 2023
 val delayAndAge = flightData.map(fields => (fields(10), fields(15).toDouble)).
   join(planeData).
-  map { case (_, (delay, age)) => (delay, age.toDouble) }
+  map { case (_, (delay, manufactureYear)) => (delay, currentYear - manufactureYear.toDouble) }
 
 
 // 지연시간과 노후화 데이터를 r1, r2로 정의
@@ -60,4 +61,4 @@ val r1RDD = sc.parallelize(delayAndAge.map(_._1).collect(), 5)
 val r2RDD = sc.parallelize(delayAndAge.map(_._2).collect(), 5)
 
 val corr = Statistics.corr(r1RDD, r2RDD, "pearson")
-println(s"상관관계: $corr")i
+println(s"상관관계: $corr")
