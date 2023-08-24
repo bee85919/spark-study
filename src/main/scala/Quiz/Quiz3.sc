@@ -33,7 +33,7 @@ Name Description
 */
 
 
-import org.apache.spark.mllib.linalg._
+mport org.apache.spark.mllib.linalg._
 import org.apache.spark.mllib.stat.Statistics
 
 // 비행 운행 데이터 로딩
@@ -60,6 +60,4 @@ val r1RDD = sc.parallelize(delayAndAge.map(_._1).collect(), 5)
 val r2RDD = sc.parallelize(delayAndAge.map(_._2).collect(), 5)
 
 val corr = Statistics.corr(r1RDD, r2RDD, "pearson")
-println(s"상관관계: $corr")
-
-
+println(s"상관관계: $corr")i

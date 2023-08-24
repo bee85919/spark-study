@@ -56,7 +56,7 @@ val joinDelayed = sumDelayed.join(cntDelayed)
 
 
 // 평균 계산
-val avgDelayed = joinedByOrigin.map { case (origin, (sum, cnt)) => (origin, sum.toDouble / cnt) }
+val avgDelayed = joinDelayed.map { case (origin, (sum, cnt)) => (origin, sum.toDouble / cnt) }
 
 
 // 출력
