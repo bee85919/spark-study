@@ -48,7 +48,7 @@ airplane 데이터에는 다음 지연 사유 데이터 종류들이 있다:
 */
 
 
-// 모듈 import
+// import modules
 import org.apache.spark.mllib.linalg._
 import org.apache.spark.mllib.stat.Statistics
 
@@ -91,10 +91,15 @@ val correlations = delayReasons.map { reasonIdx =>
   corr
 }
 
+
 // 최대 상관관계 찾기
 val maxCorrelationIdx = correlations.indices.maxBy(correlations)
 val maxCorrelation = correlations(maxCorrelationIdx)
 val maxCorrelationReasonIdx = delayReasons(maxCorrelationIdx)
 
+
 // 결과 출력
 println(s"가장 큰 영향을 미치는 지연 사유: ${delayReasonNames(maxCorrelationReasonIdx)}, 상관관계: $maxCorrelation")
+
+
+// 가장 큰 영향을 미치는 지연 사유: CarrierDelay, 상관관계: 0.5427557394915323
