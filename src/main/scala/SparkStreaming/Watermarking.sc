@@ -9,3 +9,11 @@ val windowedCounts = words
     window($"timestamp", "10 minutes", "5 minutes"),
     $"word")
   .count()
+
+
+
+df.withWatermark("time", "1 min").groupBy("time2").count()
+
+
+
+df.groupBy("time").count().withWatermark("time", "1 min")
