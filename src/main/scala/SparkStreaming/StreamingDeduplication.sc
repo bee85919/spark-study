@@ -4,6 +4,6 @@ val streamingDf = spark.readStream. ...  // columns: guid, eventTime, ...
 streamingDf.dropDuplicates("guid")
 
 // With watermark using guid and eventTime columns
-streamingDf
-  .withWatermark("eventTime", "10 seconds")
-  .dropDuplicates("guid", "eventTime")
+streamingDf.
+  withWatermark("eventTime", "10 seconds").
+  dropDuplicates("guid", "eventTime")
